@@ -19,17 +19,29 @@ variable "private_subnet_cidrs" {
   default = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
-variable "key_name" {
-  type = string
-  default = "SSH key name"
-}
-
 variable "instance_type" {
   type = string
   default = "t3.micro"
 }
 
-variable "env" {
+variable "key_name" {
   type = string
-  default = "staging"
+  sensitive = true
+  default = "SSH key name"
+}
+
+variable "db_password" {
+  type        = string
+  sensitive   = true
+  description = "Mot de passe PostgreSQL"
+}
+
+variable "aws_id" {
+  type = string
+  sensitive = true
+}
+
+variable "aws_secret" {
+  type = string
+  sensitive = true
 }
