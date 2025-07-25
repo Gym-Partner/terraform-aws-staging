@@ -33,3 +33,9 @@ variable "env" {
   type = string
   default = "staging"
 }
+
+variable "db_password" {
+  type        = string
+  sensitive   = true
+  description = "Mot de passe PostgreSQL"
+}
