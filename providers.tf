@@ -13,6 +13,7 @@ provider "aws" {
   default_tags {
     tags = {
       Environnement = "staging"
+      Project = "gym-partner"
     }
   }
 }
