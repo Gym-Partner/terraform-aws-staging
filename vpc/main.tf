@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.81.0"
-    }
-  }
-}
 # VPC
 resource "aws_vpc" "gym-partner-vpc" {
   cidr_block = var.vpc_cidr
@@ -80,4 +72,30 @@ resource "aws_route_table" "public" {
   tags = {
     Name = "public-rt"
   }
+}
+
+resource "aws_route_table_association" "public_assoc" {
+  count = 2
+  subnet_id = aws_subnet.public[count.index].id
+  route_table_id = aws_route_table.public.id
+}
+
+# Route Table - Private
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.gym-partner-vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.nat.id
+  }
+
+  tags = {
+    Name = "private-rt"
+  }
+}
+
+resource "aws_route_table_association" "private_assoc" {
+  count = 2
+  subnet_id = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private.id
 }
