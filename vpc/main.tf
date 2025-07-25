@@ -1,0 +1,1 @@
+resource "aws_vpc" "gym-partner-vpc" {}
