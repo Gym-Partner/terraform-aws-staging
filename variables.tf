@@ -21,17 +21,13 @@ variable "private_subnet_cidrs" {
 
 variable "key_name" {
   type = string
+  sensitive = true
   default = "SSH key name"
 }
 
 variable "instance_type" {
   type = string
   default = "t3.micro"
-}
-
-variable "env" {
-  type = string
-  default = "staging"
 }
 
 variable "db_password" {
