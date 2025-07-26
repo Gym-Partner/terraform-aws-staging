@@ -11,7 +11,7 @@ resource "aws_security_group" "rds_sg" {
     from_port = 5432
     to_port = 5432
     protocol = "tcp"
-    cidr_blocks = [var.microservices_sg_id]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -25,7 +25,7 @@ resource "aws_security_group" "rds_sg" {
 resource "aws_db_instance" "postgres" {
   identifier = "staging-postgres"
   engine = "postgres"
-  engine_version = "15.5"
+  engine_version = "17.4"
   instance_class = "db.t3.micro"
   allocated_storage = 20
   storage_type = "gp2"
