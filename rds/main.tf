@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "db_subnet_group" {
   name = "gym-partner-staging-db-subnet-group"
-  subnet_ids = var.private_subnet_ids
+  subnet_ids = var.public_subnet_ids
 }
 
 resource "aws_security_group" "rds_sg" {
@@ -11,7 +11,7 @@ resource "aws_security_group" "rds_sg" {
     from_port = 5432
     to_port = 5432
     protocol = "tcp"
-    cidr_blocks = [var.microservices_sg_id]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -25,7 +25,7 @@ resource "aws_security_group" "rds_sg" {
 resource "aws_db_instance" "postgres" {
   identifier = "staging-postgres"
   engine = "postgres"
-  engine_version = "15.5"
+  engine_version = "17.4"
   instance_class = "db.t3.micro"
   allocated_storage = 20
   storage_type = "gp2"
@@ -33,7 +33,7 @@ resource "aws_db_instance" "postgres" {
   username = var.db_username
   password = var.db_password
   skip_final_snapshot = true
-  publicly_accessible = false
+  publicly_accessible = true
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   backup_retention_period = 0
   multi_az = false
