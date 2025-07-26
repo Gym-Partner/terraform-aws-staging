@@ -1,22 +1,3 @@
-resource "aws_security_group" "rabbitmq_sg" {
-  name = "rabbit-sg"
-  vpc_id = var.vpc_id
-
-  ingress {
-    from_port = 5672
-    to_port = 5672
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_mq_broker" "rabbitmq_broker" {
   broker_name        = "rabbitmq-broker"
   engine_type        = "RabbitMQ"
@@ -25,8 +6,7 @@ resource "aws_mq_broker" "rabbitmq_broker" {
   deployment_mode = "SINGLE_INSTANCE"
 
   subnet_ids = [var.public_subnets_ids[0]]
-  security_groups = [aws_security_group.rabbitmq_sg.id]
-  publicly_accessible = false
+  publicly_accessible = true
 
   configuration {
     id = aws_mq_configuration.rabbitmq_broker_config.id
