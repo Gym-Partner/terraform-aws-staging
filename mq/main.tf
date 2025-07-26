@@ -7,8 +7,8 @@ resource "aws_mq_broker" "rabbitmq_broker" {
   subnet_ids = var.public_subnets_ids
   publicly_accessible = false
   configuration {
-    id = ""
-    revision = ""
+    id = aws_mq_configuration.rabbitmq_broker_config.id
+    revision = aws_mq_configuration.rabbitmq_broker_config.latest_revision
   }
   user {
     password = var.rabbit_mq_password
@@ -23,4 +23,15 @@ resource "aws_mq_broker" "rabbitmq_broker" {
   }
 
   apply_immediately = true
+}
+
+resource "aws_mq_configuration" "rabbitmq_broker_config" {
+  engine_type    = "RabbitMQ"
+  engine_version = "3.11.20"
+  name           = "rabbitmq-broker"
+  description = "RabbitMQ config"
+  data = <<DATA
+# Default RabbitMQ delivery acknowledgement timeout is 30 minutes in milliseconds
+consumer_timeout = 1800000
+DATA
 }
