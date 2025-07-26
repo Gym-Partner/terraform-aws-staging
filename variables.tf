@@ -45,3 +45,15 @@ variable "aws_secret" {
   type = string
   sensitive = true
 }
+
+variable "rabbit_mq_username" {
+  type = string
+  sensitive = true
+  description = "Username for RabbitMQ broker"
+}
+
+variable "rabbit_mq_password" {
+  type = string
+  sensitive = true
+  description = "Password for RabbitMQ broker"
+}
