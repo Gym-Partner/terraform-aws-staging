@@ -3,7 +3,7 @@ variable "vpc_id" {
 }
 
 variable "public_subnet_ids" {
-  type = list(string)
+  type = string
 }
 
 variable "key_name" {
@@ -11,5 +11,13 @@ variable "key_name" {
 }
 
 variable "instance_type" {
+  type = string
+}
+
+variable "ami_arm64" {
+  type = string
+}
+
+variable "my_ip" {
   type = string
 }
