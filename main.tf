@@ -16,6 +16,10 @@ module "ec2" {
   my_ip = var.my_ip
 }
 
+module "cognito" {
+  source = "./cognito"
+}
+
 # module "rds" {
 #   source = "./rds"
 #   db_password = var.db_password
@@ -23,4 +27,12 @@ module "ec2" {
 #   private_subnet_ids = module.vpc.private_subnet_ids
 #   public_subnet_ids = module.vpc.public_subnet_ids
 #   vpc_id = module.vpc.vpc_id
+# }
+
+# module "mq" {
+#   source = "./mq"
+#   vpc_id = module.vpc.vpc_id
+#   public_subnets_ids = module.vpc.public_subnet_ids
+#   rabbit_mq_password = var.rabbit_mq_password
+#   rabbit_mq_username = var.rabbit_mq_username
 # }
