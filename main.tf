@@ -16,6 +16,10 @@ module "ec2" {
   my_ip = var.my_ip
 }
 
+module "cognito" {
+  source = "./cognito"
+}
+
 # module "rds" {
 #   source = "./rds"
 #   db_password = var.db_password
