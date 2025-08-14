@@ -24,11 +24,3 @@ module "ec2" {
 #   public_subnet_ids = module.vpc.public_subnet_ids
 #   vpc_id = module.vpc.vpc_id
 # }
-
-# module "mq" {
-#   source = "./mq"
-#   vpc_id = module.vpc.vpc_id
-#   public_subnets_ids = module.vpc.public_subnet_ids
-#   rabbit_mq_password = var.rabbit_mq_password
-#   rabbit_mq_username = var.rabbit_mq_username
-# }
