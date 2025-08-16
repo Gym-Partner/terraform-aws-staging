@@ -35,18 +35,18 @@ resource "aws_cognito_user_pool_client" "this" {
     "ALLOW_USER_SRP_AUTH"
   ]
 
-  supported_identity_providers = ["COGNITO"]
-  allowed_oauth_flows_user_pool_client = true
-  allowed_oauth_flows = ["implicit", "code"]
-  allowed_oauth_scopes = ["email", "openid", "profile"]
+  # supported_identity_providers = ["COGNITO"]
+  # allowed_oauth_flows_user_pool_client = true
+  # allowed_oauth_flows = ["implicit", "code"]
+  # allowed_oauth_scopes = ["email", "openid", "profile"]
 
   access_token_validity = 60 # 1 hours
   id_token_validity = 60 # 1 hours
   refresh_token_validity = 30 # 30 days
 
   token_validity_units {
-    access_token = "hours"
-    id_token = "hours"
+    access_token = "minutes"
+    id_token = "minutes"
     refresh_token = "days"
   }
 }
