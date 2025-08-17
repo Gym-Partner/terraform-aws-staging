@@ -1,3 +1,12 @@
+module "kms" {
+  source = "./kms"
+}
+
+module "iam" {
+  source = "./iam"
+  kms_arn = module.kms.arn
+}
+
 module "vpc" {
   source = "./vpc"
   aws_region = var.aws_region
